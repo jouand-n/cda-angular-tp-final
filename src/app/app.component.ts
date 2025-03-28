@@ -19,11 +19,9 @@ export class AppComponent {
   private user : string|User|null = null
 
   ngOnInit(){
-    this.user = this.storageService.getSession("user")
-    if ( typeof(this.user) === 'string'){
-      this.user = JSON.parse(this.user) as User
-      this.userName = this.user.pseudo!
-    }
+    this.authService.connectedUsername$.subscribe((user) => {
+      this.userName = user
+    })
   }
 
   logout(){

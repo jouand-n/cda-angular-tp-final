@@ -29,6 +29,9 @@
             @if(loginForm.get('password')?.hasError('required')){
                 <span class="grow italic text-red-700">Ce champ est obligatoire.</span>
             }​
+            @if(loginForm.get('password')?.hasError('minlength')){
+                <span class="grow italic text-red-700">Ce champ doit faire au minimum 8 caractères.</span>
+            }​
         }
     </div>
 

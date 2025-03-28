@@ -9,8 +9,8 @@
         <button class="w-48 rounded-full border border-slate-200 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-700 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 " (click)="search()">Rechercher</button>
     </div>
 
-    @if (searchVideosResponse.length > 0) {
-        <div class="w-8/10 flex flex-wrap justify-center scroll-auto gap-4 ">
+    @if (searchVideosResponse.length) {
+        <div class="w-8/10 max-h-4/5 flex flex-wrap justify-center overflow-y-auto gap-4 ">
             
             @for (video of searchVideosResponse; track video.id) {
                 <div class="h-80 cursor-pointer group relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96 hover:shadow-lg transition-shadow duration-300">
