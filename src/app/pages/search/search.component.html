@@ -1,0 +1,33 @@
+<div class="w-full h-full flex flex-col items-center">
+    <div class="px-2 py-8">
+        <h1 class="text-4xl text-center text-gray-900">Recherche de vidéos</h1>
+    </div>
+    
+    
+    <div class="w-8/10 flex justify-center items-center gap-4">
+        <input [(ngModel)]="query" class="w-full bg-transparent placeholder:text-gray-400 text-gray-700 text-sm px-2 py-2 border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-800 hover:border-slate-400 shadow-sm focus:shadow" type="text" placeholder="Saisir vos mots clés ici" >
+        <button class="w-48 rounded-full border border-slate-200 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-700 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 " (click)="search()">Rechercher</button>
+    </div>
+
+    @if (searchVideosResponse.length > 0) {
+        <div class="w-8/10 flex flex-wrap justify-center scroll-auto gap-4 ">
+            
+            @for (video of searchVideosResponse; track video.id) {
+                <div class="h-80 cursor-pointer group relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96 hover:shadow-lg transition-shadow duration-300">
+                    <div class="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
+                        <img class="w-full h-auto transition-transform duration-500 ease-[cubic-bezier(0.25, 1, 0.5, 1)] transform group-hover:scale-110" 
+                            [src]="video.snippet.thumbnails.medium.url" alt="Thumbnail de la vidéo {{video.snippet.title}}" />
+                    </div>
+                    <div class="p-4">
+                        <h6 class="mb-2 text-slate-800 text-xl font-semibold overflow-hidden">
+                            {{video.snippet.title}}
+                        </h6>
+                    </div>
+                    <div class="px-4 pb-4 pt-0 mt-2">
+                        <a class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" [href]="'https://www.youtube.com/watch?v=' + video.id.videoId" target="_blank">Voir la vidéo</a>
+                    </div>
+                </div>
+            }
+        </div>
+    } 
+</div>

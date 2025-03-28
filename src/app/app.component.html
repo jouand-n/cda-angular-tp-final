@@ -20,7 +20,10 @@
 
           @if (authService.isConnected()) {
             <div class="p-2">
-              <a routerLink="/player" title="Lecteur de vidéo" class="text-white font-medium">Player</a>
+              <a routerLink="/player" title="Lecteur de vidéos" class="text-white font-medium">Lecteur</a>
+            </div>
+            <div class="p-2">
+              <a routerLink="/search" title="Recherche de vidéos" class="text-white font-medium">Recherche</a>
             </div>
             <div class="p-2">
               <a routerLink="/profile" title="Profil utilisateur" class="text-white font-medium">Mon profil</a>
@@ -45,6 +48,9 @@
       <div class="p-2">
         <h3 class="text-white text-medium font-bold">Mon compte</h3>
         <!-- todo complete  -->
+        @if (userName) {
+          <p class="text-white">{{userName}}</p>
+        } 
       </div>
     </div>
     <!-- vue -->

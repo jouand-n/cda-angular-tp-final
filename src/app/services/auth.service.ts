@@ -23,7 +23,8 @@ export class AuthService {
     users = users.filter(item => ((item.email === user. email) && (item.password === user.password)))
 
     if(users.length>0){
-      this.storageService.setSession("user", JSON.stringify(user))
+      console.log(users)
+      this.storageService.setSession("user", JSON.stringify(users[0]))
 
       return {
         code:'200',
