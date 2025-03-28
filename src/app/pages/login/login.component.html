@@ -1,1 +1,44 @@
-<p>login works!</p>
+
+<div class="px-2 py-8">
+    <h1 class="text-4xl text-center text-gray-900">Se connecter</h1>
+</div>
+
+<form [formGroup]="loginForm" (submit)="onSubmit()" class="flex flex-col items-center gap-4">
+    
+    <div class="flex flex-col justify-between items-center w-full">
+        <div class="flex w-2/3 justify-between items-center">
+            <label class="w-1/3" for="email">Votre email :</label>​
+            <input class="w-full bg-transparent placeholder:text-gray-400 text-gray-700 text-sm px-2 py-2 border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-800 hover:border-slate-400 shadow-sm focus:shadow" placeholder="Écrire ici ..." type="email" id="email" name="email" formControlName="email">​
+        </div>
+        @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+            @if(loginForm.get('email')?.hasError('required')){
+                <span class="grow italic text-red-700">Ce champ est obligatoire.</span>
+            }​
+            @if(loginForm.get('email')?.hasError('email')){
+                <span class="grow italic text-red-700">Ce champ est doit être un email.</span>
+            }   ​
+        }
+    </div>
+
+    <div class="flex flex-col justify-between items-center w-full">
+        <div class="flex w-2/3 justify-between items-center">
+            <label class="w-1/3" for="password">Votre mot de passe :</label>​
+            <input class="w-full bg-transparent placeholder:text-gray-400 text-gray-700 text-sm px-2 py-2 border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-800 hover:border-slate-400 shadow-sm focus:shadow" placeholder="Écrire ici ..." type="password" id="password" name="password" formControlName="password">​
+        </div>
+        @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+            @if(loginForm.get('password')?.hasError('required')){
+                <span class="grow italic text-red-700">Ce champ est obligatoire.</span>
+            }​
+        }
+    </div>
+
+    @if (errorMessage) {
+        <span class="grow italic text-red-700">{{errorMessage}}</span>
+    }
+
+    <button class="w-48 rounded-full border border-slate-200 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-700 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" [disabled]="loginForm.invalid">Se connecter</button>
+</form>
+
+<div class="px-2 py-8">
+    <p class="text-sm text-center text-gray-700">Vous n'avez pas de compte ? <a routerLink="/register" title="S'inscrire" class="font-medium">S'inscrire</a></p>
+</div>

@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title: string | null | undefined = 'Accueil';
-  h1: string | null | undefined = 'Bienvenue';
+  readonly authService : AuthService = inject(AuthService)
+
+  logout(){
+    this.authService.disconnect()
+  }
 }

@@ -1,5 +1,5 @@
-export interface Response {
+export interface ResponseApi<T = void> {
     code : string
     message : string
-    data : any
+    data? : T
 }

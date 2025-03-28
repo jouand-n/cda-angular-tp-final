@@ -1,1 +1,74 @@
-<p>register works!</p>
+
+<div class="px-2 py-8">
+    <h1 class="text-4xl text-center text-gray-900">S'inscrire</h1>
+</div>
+
+<form [formGroup]="registerForm" (submit)="onSubmit()" class="flex flex-col items-center gap-4">
+    
+    <div class="flex flex-col justify-between items-center w-full">
+        <div class="flex w-2/3 justify-between items-center">
+            <label class="w-1/3" for="pseudo">Votre pseudonyme :</label>​
+            <input class="w-full bg-transparent placeholder:text-gray-400 text-gray-700 text-sm px-2 py-2 border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-800 hover:border-slate-400 shadow-sm focus:shadow" placeholder="Écrire ici ..."  type="text" id="pseudo" name="pseudo" formControlName="pseudo">​
+        </div>
+        @if (registerForm.get('pseudo')?.touched && registerForm.get('pseudo')?.invalid) {
+            @if(registerForm.get('pseudo')?.hasError('required')){
+                <span class="grow italic text-red-700">Ce champ est obligatoire.</span>
+            }​
+        }
+    </div>
+    
+    <div class="flex flex-col justify-between items-center w-full">
+        <div class="flex w-2/3 justify-between items-center">
+            <label class="w-1/3" for="email">Votre email :</label>​
+            <input class="w-full bg-transparent placeholder:text-gray-400 text-gray-700 text-sm px-2 py-2 border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-800 hover:border-slate-400 shadow-sm focus:shadow" placeholder="Écrire ici ..." type="email" id="email" name="email" formControlName="email">​
+        </div>
+        @if (registerForm.get('email')?.touched && registerForm.get('email')?.invalid) {
+            @if(registerForm.get('email')?.hasError('required')){
+                <span class="grow italic text-red-700">Ce champ est obligatoire.</span>
+            }​
+            @if(registerForm.get('email')?.hasError('email')){
+                <span class="grow italic text-red-700">Ce champ est doit être un email.</span>
+            }   ​
+        }
+    </div>
+
+    <div class="flex flex-col justify-between items-center w-full">
+        <div class="flex w-2/3 justify-between items-center">
+            <label class="w-1/3" for="password">Votre mot de passe :</label>​
+            <input class="w-full bg-transparent placeholder:text-gray-400 text-gray-700 text-sm px-2 py-2 border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-800 hover:border-slate-400 shadow-sm focus:shadow" placeholder="Écrire ici ..." type="password" id="password" name="password" formControlName="password">​
+        </div>
+        @if (registerForm.get('password')?.touched && registerForm.get('password')?.invalid) {
+            @if(registerForm.get('password')?.hasError('required')){
+                <span class="grow italic text-red-700">Ce champ est obligatoire.</span>
+            }​
+            @if(registerForm.get('password')?.hasError('minlength')){
+                <span class="grow italic text-red-700">Ce champ doit faire au minimum 8 caractères.</span>
+            }​
+        }
+    </div>
+
+    <div class="flex flex-col justify-between items-center w-full">
+        <div class="flex w-2/3 justify-between items-center">
+            <label class="w-1/3" for="confirmPassword">Confirmez votre mot de passe :</label>​
+            <input class="w-full bg-transparent placeholder:text-gray-400 text-gray-700 text-sm px-2 py-2 border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-800 hover:border-slate-400 shadow-sm focus:shadow" placeholder="Écrire ici ..." type="confirmPassword" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword">​
+        </div>
+        @if (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid) {
+            @if(registerForm.get('confirmPassword')?.hasError('required')){
+                <span class="grow italic text-red-700">Ce champ est obligatoire.</span>
+            }​
+            @if(registerForm.get('confirmPassword')?.hasError('minlength')){
+                <span class="grow italic text-red-700">Ce champ doit faire au minimum 8 caractères.</span>
+            }​
+        }
+    </div>
+
+    @if (registerForm.hasError('notEqualsPassword')) {
+        <span class="grow italic text-red-700">Les deux mots de passe doivent être égaux.</span>
+    }
+    
+    <button class="w-48 rounded-full border border-slate-200 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-700 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" [disabled]="registerForm.invalid">Créer un profil</button>
+</form>
+
+<div class="px-2 py-8">
+    <p class="text-sm text-center text-gray-700">Déjà inscrit-e ? <a routerLink="/login" title="Se connecter" class="font-medium">Se connecter</a></p>
+</div>

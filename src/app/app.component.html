@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mon YouTube {{title? '-' + title : ''}}</title>
+  <title>Mon YouTube {{title? ' - ' + title : ''}}</title>
 </head>
 <body>
   <header class="w-full">
@@ -17,25 +17,29 @@
           <div class="p-2">
             <a routerLink="" title="Accueil" class="text-white font-medium">Accueil</a>
           </div>
-          <div class="p-2">
-            <a routerLink="/register" title="S'inscrire" class="text-white font-medium">S'inscrire</a>      
-          </div>
-          <div class="p-2">
-            <a routerLink="/login" title="Se connecter" class="text-white font-medium">Se connecter</a>      
-          </div>
-          <div class="p-2">
-            <a routerLink="/player" title="Lecteur de vidéo" class="text-white font-medium">Player</a>
-          </div>
-          <div class="p-2">
-            <a routerLink="/profile" title="Profil utilisateur" class="text-white font-medium">Mon profil</a>
-          </div>
-          <div class="p-2">
-            <a routerLink="/logout" title="Se déconnecter" class="text-white font-medium">Se déconnecter</a>
-          </div>
+
+          @if (authService.isConnected()) {
+            <div class="p-2">
+              <a routerLink="/player" title="Lecteur de vidéo" class="text-white font-medium">Player</a>
+            </div>
+            <div class="p-2">
+              <a routerLink="/profile" title="Profil utilisateur" class="text-white font-medium">Mon profil</a>
+            </div>
+            <div class="p-2">
+              <a (click)="logout()" title="Se déconnecter" class="text-white font-medium hover:cursor-pointer">Se déconnecter</a>
+            </div>
+          } @else {
+            <div class="p-2">
+              <a routerLink="/register" title="S'inscrire" class="text-white font-medium">S'inscrire</a>      
+            </div>
+            <div class="p-2">
+              <a routerLink="/login" title="Se connecter" class="text-white font-medium">Se connecter</a>      
+            </div>
+          }
         </div>
       </nav>
   </header>
-  <main class="w-full">
+  <main class="w-full flex">
     <!-- sidebar -->
     <div class="h-full w-40 fixed z-10 top-0 left-0 overflow-x-hidden pt-14 bg-gray-900">
       <div class="p-2">
@@ -43,13 +47,9 @@
         <!-- todo complete  -->
       </div>
     </div>
-    
     <!-- vue -->
-    <div class="h-full pl-40 fixed top-0 pt-14 bg-white">
-      <div class="p-2">
-        @if (h1) {
-          <h1>{{h1}}</h1>
-        }
+    <div class="h-full w-full pl-40 fixed top-0 pt-14 bg-white">
+      <div class="p-2 flex flex-col">
         <router-outlet />
       </div>
     </div>
